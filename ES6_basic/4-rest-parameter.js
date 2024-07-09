@@ -5,3 +5,5 @@ export default function returnHowManyArguments(...input) {
   }
   return sum;
 }
+
+//  or simply return arguments.length;
