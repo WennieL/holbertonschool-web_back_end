@@ -1,3 +1,7 @@
-export default function returnHowManyArguments() {
-  return arguments.length;
+export default function returnHowManyArguments(...input) {
+  let sum = 0;
+  for (let i of input) {
+    sum += 1;
+  }
+  return sum;
 }
