@@ -4,10 +4,6 @@ export default class Airport {
     this.code = code;
   }
 
-  toString() {
-    return `Airport [${this._code}] { _name: '${this._name}', _code: '${this._code}' }`;
-  }
-
   get name() {
     return this._name;
   }
@@ -28,5 +24,9 @@ export default class Airport {
       throw new Error('Code must be number');
     }
     this._code = newCode;
+  }
+
+  get [Symbol.toStringTag]() {
+    return this._code;
   }
 }
