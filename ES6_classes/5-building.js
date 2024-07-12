@@ -1,6 +1,6 @@
 export default class Building {
   constructor(sqft) {
-    if (new.target !== Building && typeof this.evacuationWarningMessage !== 'function') {
+    if (this.constructor !== Building && typeof this.evacuationWarningMessage !== 'function') {
       throw new Error('Building is an abstract class and cannot be instantiated directly');
     }
     this._sqft = sqft;
