@@ -1,5 +1,5 @@
 export function uploadPhoto() {
-  return Promise.resolve('photo-profile-1');
+  return Promise.resolve({ body: 'photo-profile-1' });
 }
 
 export function createUser() {
