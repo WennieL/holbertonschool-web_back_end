@@ -1,13 +1,21 @@
 import singUpUser from './4-user-promise';
 import uploadPhoto from './5-photo-reject';
 
-export default function handleProfileSignup() {
-  return Promise.allSettled([singUpUser, uploadPhoto])
-    .then((values) => {
-      const [photo, user] = values;
-      return {
-        status: 200,
-        value: `${photo.fileName} ${user.fileName} ${user.lastName}`,
-      };
-    });
+export default function handleProfileSignup(firstName, lastName, fileName) {
+  const user = singUpUser(firstName, lastName)
+    .then((value) => ({
+      status: 'fulfilled',
+      value: {
+        firstName: value.firstName,
+        lastName: value.lastName,
+      },
+    }));
+
+  const photo = uploadPhoto(fileName)
+    .catch((e) => ({
+      status: 'rejected',
+      value: e,
+    }));
+
+  return Promise.all([user, photo]);
 }
