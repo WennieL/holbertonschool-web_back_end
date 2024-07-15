@@ -1,8 +1,8 @@
-import singUpUser from './4-user-promise';
+import signUpUser from './4-user-promise';
 import uploadPhoto from './5-photo-reject';
 
 export default function handleProfileSignup(firstName, lastName, fileName) {
-  const user = singUpUser(firstName, lastName)
+  const user = signUpUser(firstName, lastName)
     .then((value) => ({
       status: 'fulfilled',
       value: {
@@ -12,9 +12,9 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
     }));
 
   const photo = uploadPhoto(fileName)
-    .catch((e) => ({
+    .catch((error) => ({
       status: 'rejected',
-      value: e,
+      value: error,
     }));
 
   return Promise.all([user, photo]);
