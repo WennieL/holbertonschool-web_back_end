@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
+'''This module takes a float and returns the string representation of the float'''
+
 
 def to_str(n: float) -> str:
-    '''a type-annotated function to_str that takes 
-    a float n as argument and returns the 
-    string representation of the float.'''
+    '''
+    Type-annotated function - to_str 
+    Arguments: a float n
+    returns: string representation of the float.'''
     return str(n)
