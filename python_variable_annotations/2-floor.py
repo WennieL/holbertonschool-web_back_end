@@ -4,8 +4,8 @@
 
 def floor(n: float) -> int:
     '''
-    Type-annotated function - floor 
-    aRGUMENTS: a float n 
+    Type-annotated function - floor
+    aRGUMENTS: a float n
     Returns the floor of the float.
     '''
     return int(n)
