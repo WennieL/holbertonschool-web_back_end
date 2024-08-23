@@ -44,7 +44,7 @@ class Server:
 
         rows = self.indexed_dataset()
 
-        assert (type(index) == int and index >= 0 and index < len(rows))
+        assert isinstance(index, int) and index >= 0 and index < len(rows)
 
         next_index = index + page_size
 
