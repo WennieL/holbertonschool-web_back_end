@@ -10,4 +10,10 @@ topic (string) will be topic searched
 
 def schools_by_topic(mongo_collection, topic):
     '''a function that returns the list of school having a specific topic:'''
-    return mongo_collection.find({"topic": topic})
+    result = []
+
+    r = mongo_collection.find({'topics': topic})
+
+    result.append(r)
+
+    return r
