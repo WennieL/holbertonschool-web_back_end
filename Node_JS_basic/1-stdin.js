@@ -4,7 +4,7 @@ const readline = require('readline').createInterface({
 });
 
 readline.question('Welcome to Holberton School, what is your name?\n', (name) => {
-  console.log(`Your name is: ${name}\r`);
-  console.log('This important software is now closing');
+  console.log(`Your name is: ${name}`);
+  console.log('This important software is now closing\r');
   readline.close();
 });
