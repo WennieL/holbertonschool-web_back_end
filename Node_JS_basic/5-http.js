@@ -1,37 +1,29 @@
-import database.csv
-
 const http = require('http');
 const fs = require('fs');
-const path = require('path');
 
-const host = 'localhost';
-const port = 1245;
+const app = http.createServer((req, res) => {
+  if (req.url === '/') {
+    res.setHeader('Content-Type', 'text/plain');
+    res.writeHead(200);
+    res.end('Hello Holberton School!');
+  } else if (req.url === '/students') {
+    const database = process.argv[2];
+    res.setHeader('Content-Type', 'text/plain');
 
-function requestListener(req, res) {
-  res.setHeader('Content-Type", "text/plain');
-  switch (req.url) {
-    case '/':
-      res.writeHead(200);
-      res.end('Hello Holberton School!');
-      break;
-    case '/students':
-      // Read the database.csv file asynchronously
-      const databasePath = path.join(__dirname, 'database.csv');
-      fs.readFile(databasePath, 'utf-8', (err, data) => {
-        if (err) {
-          res.writeHead(500);
-          res.end('Cannot load the database');
-          return;
-        }
-
+    // Asynchronously read the file
+    fs.readFile(database, 'utf-8', (err, data) => {
+      if (err) {
+        res.writeHead(500);
+        res.end('Cannot load the database');
+      } else {
         let response = 'This is the list of our students\n';
-        const lines = data.split('\n').filter(line => line.trim() !== '');  // Remove empty lines
+        const lines = data.split('\n').filter((line) => line.trim() !== '');
         const studentsCS = [];
         const studentsSWE = [];
 
-        for (let i = 1; i < lines.length; i++) {  // Skip the first line (header)
+        for (let i = 1; i < lines.length; i++) {
           const parts = lines[i].split(',');
-          if (parts.length >= 4) {  // Ensure the row has enough columns
+          if (parts.length >= 4) {
             const firstName = parts[0];
             const field = parts[3];
             if (field === 'CS') {
@@ -42,23 +34,21 @@ function requestListener(req, res) {
           }
         }
 
-        // Generate the response string
         response += `Number of students: ${studentsCS.length + studentsSWE.length}\n`;
         response += `Number of students in CS: ${studentsCS.length}. List: ${studentsCS.join(', ')}\n`;
         response += `Number of students in SWE: ${studentsSWE.length}. List: ${studentsSWE.join(', ')}`;
-
         res.writeHead(200);
         res.end(response);
-      });
-      break;
-    default:
-      res.writeHead(404);
-      res.end(JSON.stringify({error: 'Resource not found'}));
+      }
+    });
+  } else {
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Not Found');
   }
-};
-
-const app = http.createServer(requestListener);
-app.listen(port, host, () => {
-  console.log(`Server is running on http://${host}:${port}`);
 });
 
+app.listen(1245, () => {
+  console.log('Server is running on port 1245');
+});
+
+module.exports = app;
