@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(1245, () => {
-  console.log(`Server is listening on port ${port}`);
+  console.log('Server is listening on port 1245');
 });
 
 module.exports = app;
