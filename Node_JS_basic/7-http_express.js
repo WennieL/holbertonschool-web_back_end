@@ -1,6 +1,8 @@
 const express = require('express');
+const fs = require('fs');
 
 const app = express();
+const filename = process.argv[2];
 
 app.get('/', (req, res) => {
   res.status(200);
@@ -12,7 +14,7 @@ app.get('/students', async (req, res) => {
   res.send('This is the list of our students');
 
   try {
-    const data = await fs.readFile(database, 'utf8');
+    const data = await fs.readFile(filename, 'utf8');
     const rows = data.split('\n').slice(1);
 
     const studentsCS = [];
