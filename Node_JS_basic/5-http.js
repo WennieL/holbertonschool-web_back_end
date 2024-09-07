@@ -15,11 +15,9 @@ async function requestListener(req, res) {
       break;
     case '/students':
       res.writeHead(200);
-
+      res.write('This is the list of our students\n');
       try {
-        res.write('This is the list of our students\n');
-
-        const data = await fs.readFileSync(filename, 'utf-8');
+        const data = await fs.readFil(filename, 'utf-8');
         const rows = data.split('\n').slice(1);
 
         const studentsCS = [];
@@ -41,14 +39,15 @@ async function requestListener(req, res) {
 
         res.write(`Number of students: ${studentsCS.length + studentsSWE.length}\n`);
         res.write(`Number of students in CS: ${studentsCS.length}. List: ${studentsCS.join(', ')}\n`);
-        res.end(`Number of students in SWE: ${studentsSWE.length}. List: ${studentsSWE.join(', ')}`);
+        res.write(`Number of students in SWE: ${studentsSWE.length}. List: ${studentsSWE.join(', ')}`);
+        res.end();
       } catch (error) {
         res.end('Cannot load the database');
       }
       break;
     default:
-      res.writeHead(200);
-      res.end('Hello Holberton School!');
+      res.writeHead(404);
+      res.end('Not Found - Hello Holberton School!');
   }
 }
 
