@@ -24,11 +24,11 @@ async function requestListener(req, res) {
           if (row.trim() !== '') {
             const data = row.split(',');
 
-            if (data[3] === 'CS') {
+            if (data[3] === 'CS') { // hardcode
               studentsCS.push(data[0]);
             }
 
-            if (data[3] === 'SWE') {
+            if (data[3] === 'SWE') { // hardcode
               studentsSWE.push(data[0]);
             }
           }
